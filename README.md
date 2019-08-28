@@ -6,7 +6,7 @@ The `nextstrain.yml` file in this repo is hosted at <http://data.nextstrain.org/
 
 You can set it up by running:
 
-    curl http://data.nextstrain.org/nextstrain.yml --compressed -o nextstrain.yml
+    curl http://data.nextstrain.org/nextstrain.yml -o nextstrain.yml
     conda env create -f nextstrain.yml
     conda activate nextstrain
     npm install --global auspice
