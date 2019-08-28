@@ -1,0 +1,25 @@
+#!/bin/bash
+set -euo pipefail
+
+base="$(dirname $0)"
+
+distribution=$(
+    aws cloudfront list-distributions \
+        --query 'DistributionList.Items[?contains(Aliases.Items, `data.nextstrain.org`)] | [0].Id' \
+        --output text
+)
+
+if [[ -z $distribution || $distribution == None ]]; then
+    echo "Unable to find CloudFront distribution id for data.nextstrain.org" >&2
+    echo
+    echo "Are your AWS CLI credentials for the right account?" >&2
+    exit 1
+fi
+
+aws s3 cp --content-type text/yaml \
+    "$base"/nextstrain.yml \
+    s3://nextstrain-data/
+
+aws cloudfront create-invalidation \
+    --distribution-id "$distribution" \
+    --paths /nextstrain.yml
