@@ -1,0 +1,17 @@
+name: nextstrain
+channels:
+- bioconda
+- conda-forge
+- defaults
+dependencies:
+- cvxopt
+- fasttree
+- iqtree
+- mafft
+- pandas
+- python=3.6*
+- nodejs=10
+- raxml
+- git
+- pip:
+  - nextstrain-augur
