@@ -13,5 +13,6 @@ dependencies:
 - nodejs=10
 - raxml
 - git
+- pip
 - pip:
   - nextstrain-augur
