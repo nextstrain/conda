@@ -1,0 +1,48 @@
+name: Test Conda environment definition and publish if good
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Fix Conda permissions on macOS
+        run: sudo chown -R $UID $HOME/.conda
+        if: matrix.os == 'macos-latest'
+
+      - name: Install Nextstrain environment
+        run: |
+          source $CONDA/etc/profile.d/conda.sh
+          conda env create -f nextstrain.yml
+          conda activate nextstrain
+          npm install --global auspice
+
+      - name: Show versions of Nextstrain components
+        run: |
+          source $CONDA/etc/profile.d/conda.sh
+          conda activate nextstrain
+          nextstrain --version
+          augur --version
+          auspice --version
+
+  publish:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Publish nextstrain.yml to data.nextstrain.org
+        run: ./publish
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
