@@ -3,6 +3,7 @@ set -euo pipefail
 
 base="$(dirname $0)"
 
+echo "-> Finding CloudFront distribution"
 distribution=$(
     aws cloudfront list-distributions \
         --query 'DistributionList.Items[?contains(Aliases.Items, `data.nextstrain.org`)] | [0].Id' \
@@ -16,10 +17,22 @@ if [[ -z $distribution || $distribution == None ]]; then
     exit 1
 fi
 
+echo "-> Uploading to S3"
 aws s3 cp --content-type text/yaml \
     "$base"/nextstrain.yml \
     s3://nextstrain-data/
 
-aws cloudfront create-invalidation \
+echo "-> Creating CloudFront invalidation for distribution $distribution"
+invalidation=$(
+    aws cloudfront create-invalidation \
+        --distribution-id "$distribution" \
+        --paths /nextstrain.yml \
+        --query Invalidation.Id \
+        --output text
+)
+
+echo "-> Waiting for CloudFront invalidation $invalidation to complete"
+echo "   Ctrl-C to stop waiting."
+aws cloudfront wait invalidation-completed \
     --distribution-id "$distribution" \
-    --paths /nextstrain.yml
+    --id "$invalidation"
