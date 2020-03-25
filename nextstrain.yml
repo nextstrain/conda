@@ -4,11 +4,13 @@ channels:
 - defaults
 dependencies:
 - cvxopt
+- datrie
 - fasttree
 - iqtree
 - mafft
 - opencv
 - pandas
+- psutil
 - python=3.6*
 - nodejs=10
 - raxml
@@ -18,3 +20,4 @@ dependencies:
 - pip:
   - nextstrain-augur
   - nextstrain-cli
+  - rethinkdb==2.3.0.post6
