@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@v1
 
       - name: Fix Conda permissions on macOS
-        run: sudo chown -R $UID $HOME/.conda
+        run: sudo chown -R $UID $CONDA
         if: matrix.os == 'macos-latest'
 
       - name: Install Nextstrain environment
