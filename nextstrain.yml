@@ -18,6 +18,7 @@ dependencies:
 - git
 - pip
 - pip:
+  - awscli
   - nextstrain-augur
   - nextstrain-cli
   - rethinkdb==2.3.0.post6
