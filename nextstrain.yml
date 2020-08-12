@@ -22,3 +22,4 @@ dependencies:
   - nextstrain-augur
   - nextstrain-cli
   - rethinkdb==2.3.0.post6
+  - snakemake
