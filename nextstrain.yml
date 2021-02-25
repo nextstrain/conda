@@ -6,7 +6,7 @@ channels:
 dependencies:
 - augur
 - python>=3.6*
-- nodejs=10
+- nodejs>=10
 - git
 - pip
 - pip:
