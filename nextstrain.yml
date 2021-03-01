@@ -5,6 +5,7 @@ channels:
 - defaults
 dependencies:
 - augur
+- nextalign=0.1.6
 - python>=3.6*
 - nodejs>=10
 - git
