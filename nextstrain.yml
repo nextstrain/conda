@@ -6,11 +6,11 @@ channels:
 dependencies:
 - augur
 - nextalign=0.1.6
+- nextstrain-cli
 - python>=3.6*
 - nodejs>=10
 - git
 - pip
 - pip:
   - awscli
-  - nextstrain-cli
   - rethinkdb==2.3.0.post6
