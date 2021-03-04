@@ -4,10 +4,21 @@
 
 The `nextstrain.yml` file in this repo is hosted at <http://data.nextstrain.org/nextstrain.yml> and serves as an environment definition for Conda.
 
-You can set it up by running:
+Setup the Nextstrain environment by running:
 
     curl http://data.nextstrain.org/nextstrain.yml -o nextstrain.yml
     conda env create -f nextstrain.yml
+    conda activate nextstrain
+    npm install --global auspice
+
+For a faster installation process, use [Mamba](https://github.com/mamba-org/mamba) as a drop-in replacement for Conda's installer.
+
+    # Install Mamba
+    conda install -c conda-forge mamba
+
+    # Create environment with Mamba.
+    curl http://data.nextstrain.org/nextstrain.yml -o nextstrain.yml
+    mamba env create -f nextstrain.yml
     conda activate nextstrain
     npm install --global auspice
 
