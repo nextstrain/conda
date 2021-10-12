@@ -4,10 +4,10 @@ channels:
 - bioconda
 - defaults
 dependencies:
-- augur>=11.3.0
-- nextalign=0.1.6
+- augur>=13
+- nextalign=1
 - nextstrain-cli
-- python>=3.6*
+- python>=3.6
 - nodejs>=10
 - git
 - pip
