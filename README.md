@@ -39,3 +39,26 @@ AWS credentials are stored in this [repository's
 secrets](https://github.com/nextstrain/conda/settings/secrets) and are
 associated with the `nextstrain-conda-publisher` IAM user in the Bedford Lab
 AWS account, which is locked down to publishing only that file.
+
+
+## Why does this repo exist?
+
+Historically there were lots of ad-hoc Conda environment files for Nextstrain
+(and various subprojects, like Augur).  Some of these still linger because they
+were never removed.  They probably should be.
+
+There was also an "official" environment file at
+<https://data.nextstrain.org/nextstrain.yml> used in some common installation
+instructions.  This file was not in source control and did not have an
+authoritative source other than the `nextstrain-data` S3 bucket itself.
+
+In an attempt to address both the proliferation and lack of authoritative
+source control for the environment file, I (@tsibley) created this repo in
+2019.  It let us start to standardize the Conda environment for Nextstrain.
+
+These days, we no longer refer to <https://data.nextstrain.org/nextstrain.yml>
+in [our installation docs](https://docs.nextstrain.org/en/latest/install.html),
+because we moved to having official Conda packages instead of an environment
+definition. However, it's still referenced widely enough ([for
+example](https://github.com/search?q=http%3A%2F%2Fdata.nextstrain.org%2Fnextstrain.yml&type=code))
+that I wouldn't want to just remove it unceremoniously.
